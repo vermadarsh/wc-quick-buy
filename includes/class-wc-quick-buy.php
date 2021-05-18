@@ -147,14 +147,10 @@ class Wc_Quick_Buy {
 	 */
 	private function define_public_hooks() {
 		$plugin_public   = new Wc_Quick_Buy_Public( $this->get_plugin_name(), $this->get_version() );
-		$button_position = wpqb_get_plugin_setting( 'position' );
-		$button_hook     = ( 'before_add_to_cart' === $button_position ) ? 'woocommerce_before_add_to_cart_button' : 'woocommerce_after_add_to_cart_button';
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wcqb_wp_enqueue_scripts_callback' );
-		$this->loader->add_action( $button_hook, $plugin_public, 'wcqb_woocommerce_product_add_to_cart_button_callback' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'wcqb_wp_head_callback' );
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'wcqb_wp_footer_callback' );
-		$this->loader->add_action( 'wp', $plugin_public, 'wcqb_wp_callback', 90 );
+		$this->loader->add_action( 'woocommerce_before_add_to_cart_button', $plugin_public, 'wcqb_woocommerce_before_add_to_cart_button_callback' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $plugin_public, 'wcqb_woocommerce_after_add_to_cart_button_callback' );
 	}
 
 	/**

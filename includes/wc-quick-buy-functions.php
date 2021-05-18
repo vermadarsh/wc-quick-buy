@@ -17,39 +17,44 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  */
 function wpqb_get_plugin_setting( $setting ) {
 	switch ( $setting ) {
-		case 'redirect-to':
-			$redirect_to  = get_option( 'wcqb_redirect_to' );
-			$setting_data = ( ! empty( $redirect_to ) && ! is_bool( $redirect_to ) ) ? $redirect_to : 'checkout';
+		case 'single-product-display-button':
+			$setting_data = get_option( 'wcqb_show_button_on_single_product' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : 'no';
 			break;
 
-		case 'position':
-			$position     = get_option( 'wcqb_quick_buy_button_position' );
-			$setting_data = ( ! empty( $position ) && ! is_bool( $position ) ) ? $position : 'after_add_to_cart';
+		case 'single-product-button-position':
+			$setting_data = get_option( 'wcqb_quick_buy_button_position_single_product' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : 'after_add_to_cart';
 			break;
 
-		case 'button-text':
-			$button_text  = get_option( 'wcqb_quick_buy_button_text' );
-			$setting_data = ( ! empty( $button_text ) && ! is_bool( $button_text ) ) ? $button_text : __( 'Quick Buy', 'wc-quick-buy' );
+		case 'single-product-button-text':
+			$setting_data = get_option( 'wcqb_quick_buy_button_text_single_product' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : __( 'Quick Buy', 'wc-quick-buy' );
+			break;
+
+		case 'single-product-button-classes':
+			$setting_data = get_option( 'wcqb_quick_buy_button_extra_class_single_product' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : '';
+			break;
+
+		case 'archive-page-display-button':
+			$setting_data = get_option( 'wcqb_show_button_on_archive_pages' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : 'no';
+			break;
+
+		case 'archive-page-button-position':
+			$setting_data = get_option( 'wcqb_quick_buy_button_position_archive_page' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : 'after_add_to_cart';
 			break;
 
 		case 'archive-page-button-text':
-			$button_text  = get_option( 'wcqb_archive_page_quick_buy_button_text' );
-			$setting_data = ( ! empty( $button_text ) && ! is_bool( $button_text ) ) ? $button_text : __( 'Quick Buy', 'wc-quick-buy' );
+			$setting_data = get_option( 'wcqb_archive_page_quick_buy_button_text' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : __( 'Quick Buy', 'wc-quick-buy' );
 			break;
 
-		case 'button-class':
-			$button_class = get_option( 'wcqb_quick_buy_button_extra_class' );
-			$setting_data = ( ! empty( $button_class ) && ! is_bool( $button_class ) ) ? explode( ',', $button_class ) : array();
-			break;
-
-		case 'custom-css':
-			$css          = get_option( 'wcqb_quick_buy_custom_css' );
-			$setting_data = ( ! empty( $css ) && ! is_bool( $css ) ) ? $css : '';
-			break;
-
-		case 'popup-congratulations-text':
-			$congrats_text = get_option( 'wcqb_quick_buy_popup_congratulations_text' );
-			$setting_data  = ( ! empty( $congrats_text ) && ! is_bool( $congrats_text ) ) ? $congrats_text : '';
+		case 'archive-page-button-classes':
+			$setting_data = get_option( 'wcqb_quick_buy_button_extra_class_archive_page' );
+			$setting_data = ( ! empty( $setting_data ) && ! is_bool( $setting_data ) ) ? $setting_data : '';
 			break;
 
 		default:
@@ -57,4 +62,26 @@ function wpqb_get_plugin_setting( $setting ) {
 	}
 
 	return $setting_data;
+}
+
+/**
+ * Return the "Quick Buy" button html.
+ *
+ * @param int     $product_id Holds the product ID.
+ * @return string
+ */
+function wcqb_display_quick_buy_button_html_single_product( $product_id ) {
+	// Get the button text.
+	$button_text = wpqb_get_plugin_setting( 'single-product-button-text' );
+
+	// Button extra classes attribute.
+	$button_classes = wpqb_get_plugin_setting( 'single-product-button-classes' );
+	ob_start();
+	?>
+	<div class="wcqb-quick-buy-button-wrapper single-product">
+		<button type="button" data-product_id="<?php echo esc_attr( $product_id ); ?>" class="single_add_to_cart_button button alt <?php echo esc_attr( $button_classes );?>"><?php echo esc_html( $button_text ); ?></button>
+	</div>
+	<?php
+
+	return ob_get_clean();
 }
