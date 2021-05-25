@@ -151,6 +151,10 @@ class Wc_Quick_Buy {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wcqb_wp_enqueue_scripts_callback' );
 		$this->loader->add_action( 'woocommerce_before_add_to_cart_button', $plugin_public, 'wcqb_woocommerce_before_add_to_cart_button_callback' );
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $plugin_public, 'wcqb_woocommerce_after_add_to_cart_button_callback' );
+		$this->loader->add_action( 'wp_footer', $plugin_public, 'wcqb_wp_footer_callback' );
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'wcqb_woocommerce_after_shop_loop_item_callback' );
+		$this->loader->add_action( 'wp_ajax_save_cart_session', $plugin_public, 'wcqb_save_cart_session_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_save_cart_session', $plugin_public, 'wcqb_save_cart_session_callback' );
 	}
 
 	/**

@@ -171,19 +171,6 @@ class Wc_Quick_Buy_Admin {
 					'id'       => 'wcqb_show_button_on_archive_pages',
 				),
 				array(
-					'name'     => __( 'Position', 'wc-quick-buy' ),
-					'type'     => 'select',
-					'options'  => array(
-						'before_add_to_cart' => __( 'Before Add to Cart', 'wc-quick-buy' ),
-						'after_add_to_cart'  => __( 'After Add to Cart', 'wc-quick-buy' ),
-					),
-					'class'    => 'wc-enhanced-select',
-					'desc'     => __( 'This sets the position of the "Quick Buy" button. Default: After add to cart.', 'wc-quick-buy' ),
-					'desc_tip' => true,
-					'default'  => '',
-					'id'       => 'wcqb_quick_buy_button_position_archive_page',
-				),
-				array(
 					'name'        => __( 'Button Text', 'wc-quick-buy' ),
 					'type'        => 'text',
 					'class'       => 'wcqb-archive-page-quick-buy-button-text',

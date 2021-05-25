@@ -90,6 +90,14 @@ class Wc_Quick_Buy_Public {
 	public function wcqb_woocommerce_before_add_to_cart_button_callback() {
 		global $product;
 
+		// Get the product type.
+		$product_type = $product->get_type();
+
+		// Return, if the product type is external.
+		if ( 'external' === $product_type ) {
+			return;
+		}
+
 		// Should the button be displayed or not.
 		$display_button = wpqb_get_plugin_setting( 'single-product-display-button' );
 
@@ -116,6 +124,14 @@ class Wc_Quick_Buy_Public {
 	public function wcqb_woocommerce_after_add_to_cart_button_callback() {
 		global $product;
 
+		// Get the product type.
+		$product_type = $product->get_type();
+
+		// Return, if the product type is external.
+		if ( 'external' === $product_type ) {
+			return;
+		}
+
 		// Should the button be displayed or not.
 		$display_button = wpqb_get_plugin_setting( 'single-product-display-button' );
 
@@ -137,9 +153,69 @@ class Wc_Quick_Buy_Public {
 	}
 
 	/**
+	 * Place the "Quick Buy" button on the shop and other archive pages.
+	 */
+	public function wcqb_woocommerce_after_shop_loop_item_callback() {
+		global $product;
+
+		// Get the product type.
+		$product_type = $product->get_type();
+
+		// Return, if the product type is not simple.
+		if ( 'simple' !== $product_type ) {
+			return;
+		}
+
+		// Should the button be displayed or not.
+		$display_button = wpqb_get_plugin_setting( 'archive-page-display-button' );
+
+		// Return, if the button is not to be displayed.
+		if ( ! empty( $display_button ) && 'no' === $display_button ) {
+			return;
+		}
+
+		// Display the button now.
+		echo wcqb_display_quick_buy_button_html_archive_page( $product->get_id() );
+	}
+
+	/**
+	 * AJAX served to save the items in cart session.
+	 */
+	public function wcqb_save_cart_session_callback() {
+		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+
+		// Exit, if the action doesn't match.
+		if ( empty( $action ) || 'save_cart_session' !== $action ) {
+			echo 0;
+			wp_die();
+		}
+
+		// Posted items.
+		$posted_array = filter_input_array( INPUT_POST );
+		$items        = $posted_array['items'];
+
+		// Exit, if the items array is empty or invalid.
+		if ( empty( $items ) || ! is_array( $items ) ) {
+			echo -1;
+			wp_die();
+		}
+
+		// Set the session.
+		$session_data = array(
+			'items' => $items,
+		);
+		WC()->session->set( 'wcqb_data', $session_data );
+
+		// Get the customer's address data.
+		if ( is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+		}
+	}
+
+	/**
 	 * Add quick buy popup HTML.
 	 */
-	function wcqb_wp_footer_callback() {
+	public function wcqb_wp_footer_callback() {
 		global $product;
 
 		// Return if it's not the product single page.
@@ -147,11 +223,8 @@ class Wc_Quick_Buy_Public {
 			return;
 		}
 
-		// Set the popup HTML now.
-		ob_start();
-		?>
-		
-		<?php
-		echo ob_get_clean();
+		// Include the modals.
 	}
 }
+
+

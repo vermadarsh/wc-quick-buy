@@ -1,0 +1,233 @@
+.wcqb_quick_buy_button span {
+    color: #fff;
+    margin-left: 2px;
+}
+.non-clickable {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.direct_buynow_section p{
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #777;
+}
+.direct_buynow_section label{
+    font-size: 15px;
+    margin-bottom: 0;
+    padding-right: 70px;
+}
+.direct_buynow_section .field{
+    margin: 0px;
+}
+.direct_buynow_section a{
+    margin: 10px 0px;
+    font-size: 13px;
+    display: block;
+    color: #000639;
+    text-align: right;
+    font-weight: 700;
+}
+.direct_buynow_section button{
+    width: 100%;;
+}
+.direct_buynow_section button i{
+ margin-right:8px;
+}
+.down_modal{
+display: none;
+top: 0;
+left: 0;
+z-index: 1;
+height: 100%;
+overflow: auto; 
+background-color: rgba(0, 0, 0, .4);
+-webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    animation-duration: .4s;
+}
+.down_modal_content, .down_modal{
+    position: fixed;
+    width: 100%;
+    -webkit-animation-duration: .4s;
+    animation-duration: .4s;
+    z-index: 9999999999;
+}
+.down_modal_content{
+    padding: 15px;
+    bottom: 0px;
+    background-color: #FEFEFE;
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+    animation-duration: .4;
+}
+.down_modal_body{
+    padding-left: 1pc;
+    padding-bottom: .020833333in;
+    padding-right: 1pc;
+    padding-top: .020833333in;
+}
+.pop_field input:focus {
+    border-color: #000639;
+}
+@-webkit-keyframes slideIn {
+    from {
+            bottom: -300px;
+            opacity: 0;
+    }
+    to {
+            bottom: 0;
+            opacity: 1;
+    }
+}
+@keyframes slideIn {
+    from {
+            bottom: -300px;
+            opacity: 0;
+    }
+    to {
+            bottom: 0;
+            opacity: 1;
+    }
+}
+@-webkit-keyframes fadeIn {
+    from {
+            opacity: 0;
+    }
+    to {
+            opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+            opacity: 0;
+    }
+    to {
+            opacity: 1;
+    }
+}
+/* .pop_field:before {
+    content: "+91";
+    display: block;
+    position: absolute;
+    left: 8px;
+    z-index: 9999999;
+    color: #000639;
+    font-size: 15px;
+    top: 13px;
+} */
+.pop_field{
+    position: relative;
+    margin-top: 22px;
+}
+.pop_field label{
+position: absolute;
+margin-left: 17px;
+font-size: 11px;
+color: #000639;
+background: #fff;
+top: -8px;
+padding: 0px 10px;
+}
+.pop_field input{
+    border-color: #000639;
+    color: #000639;
+    padding: 15px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.pop_image_small{
+    position: absolute;
+    right: 17px;
+    width: 48px;  
+    top: 7px;
+}
+.enquiry_msg{
+    position: absolute;
+    left: 9px;
+    bottom: 10px;
+    padding: 7px 9px 6px;
+    border-radius: 50px;
+    background: #000639;
+}
+.enquiry_msg i{
+    font-size: 20px!important;
+    color: #ffffff;
+    margin: 0px!important;
+}
+.btn-pading-left{
+    padding-left: 35px;
+}
+
+#confetti-canvas{
+    position: fixed;
+    top: 0;
+    z-index: 99999999999!important;
+}
+
+
+
+#popup {
+    display: none;
+    height: 85vh;
+    position: fixed;
+    top: 100%;
+   /* left: calc(50% - 100px);*/
+    background: #fff;
+    color: #000;
+    margin: 0;
+    padding: 40px;
+    max-width: 790px;
+    border-radius:10px ;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .cms-popup .address-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.cms-popup .address-main .address-box{
+    border: 1px solid #dde5ed;
+    width: calc(25% - 20px);
+    min-width: 343.333px;
+    box-sizing: border-box;
+    word-break: break-word;
+    padding: 15px 20px;
+    border-radius: 3px;
+    margin: 5px;
+    position: relative;
+  }
+
+  .new-box{
+    height: 85vh;
+    position: fixed;
+    top: 100%;
+   /* left: calc(50% - 100px);*/
+    background: #fff;
+    color: #000;
+    margin: 0;
+    padding: 40px;
+    max-width: 790px;
+    border-radius:10px ;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    margin: auto;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+  }
+
+  .new-box.open{
+    top: 0;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+  }
